@@ -623,7 +623,7 @@ public abstract class Utils {
     public static void drawSpannable(Canvas c, CharSequence text, Paint paint, float x, float y) {
         TextPaint textPaint = new TextPaint(paint);
         textPaint.setTextAlign(Paint.Align.CENTER);
-        StaticLayout layout = new StaticLayout(text, textPaint, c.getWidth(), Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
+        StaticLayout layout = new StaticLayout(text, textPaint, c.getWidth(), Layout.Alignment.ALIGN_NORMAL, 0.5f, 0, false);
         c.save();
         c.translate(x, y);
         layout.draw(c);
