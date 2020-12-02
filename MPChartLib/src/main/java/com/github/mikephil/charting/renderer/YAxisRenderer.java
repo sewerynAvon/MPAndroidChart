@@ -124,7 +124,7 @@ public class YAxisRenderer extends AxisRenderer {
         // draw
         for (int i = from; i < to; i++) {
 
-            String text = mYAxis.getFormattedLabel(i);
+            String text = mYAxis.getFormattedLabel(i).toString();
 
             c.drawText(text,
                     fixedPosition + xOffset,

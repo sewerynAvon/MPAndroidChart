@@ -500,12 +500,12 @@ public abstract class AxisBase extends ComponentBase {
      *
      * @return
      */
-    public String getLongestLabel() {
+    public CharSequence getLongestLabel() {
 
-        String longest = "";
+        CharSequence longest = "";
 
         for (int i = 0; i < mEntries.length; i++) {
-            String text = getFormattedLabel(i);
+            CharSequence text = getFormattedLabel(i);
 
             if (text != null && longest.length() < text.length())
                 longest = text;
@@ -514,7 +514,7 @@ public abstract class AxisBase extends ComponentBase {
         return longest;
     }
 
-    public String getFormattedLabel(int index) {
+    public CharSequence getFormattedLabel(int index) {
 
         if (index < 0 || index >= mEntries.length)
             return "";

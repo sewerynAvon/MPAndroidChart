@@ -17,10 +17,13 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
@@ -65,11 +68,15 @@ public class MultiLineChartActivity extends DemoBase implements OnSeekBarChangeL
         chart.setDrawBorders(false);
 
         chart.getAxisLeft().setEnabled(false);
+        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getAxisRight().setDrawAxisLine(false);
         chart.getAxisRight().setDrawGridLines(false);
-        chart.getXAxis().setDrawAxisLine(false);
-        chart.getXAxis().setDrawGridLines(false);
-
+        chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return "Mon\n" + value + "\no";
+            }
+        });
         // enable touch gestures
         chart.setTouchEnabled(true);
 

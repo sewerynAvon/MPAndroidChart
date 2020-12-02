@@ -64,7 +64,7 @@ public class XAxisRendererHorizontalBarChart extends XAxisRenderer {
         mAxisLabelPaint.setTypeface(mXAxis.getTypeface());
         mAxisLabelPaint.setTextSize(mXAxis.getTextSize());
 
-        String longest = mXAxis.getLongestLabel();
+        String longest = mXAxis.getLongestLabel().toString();
 
         final FSize labelSize = Utils.calcTextSize(mAxisLabelPaint, longest);
 
@@ -156,7 +156,7 @@ public class XAxisRendererHorizontalBarChart extends XAxisRenderer {
 
             if (mViewPortHandler.isInBoundsY(y)) {
 
-                String label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis);
+                String label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis).toString();
                 drawLabel(c, label, pos, y, anchor, labelRotationAngleDegrees);
             }
         }

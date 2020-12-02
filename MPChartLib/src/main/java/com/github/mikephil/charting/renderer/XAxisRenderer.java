@@ -76,7 +76,7 @@ public class XAxisRenderer extends AxisRenderer {
 
     protected void computeSize() {
 
-        String longest = mXAxis.getLongestLabel();
+        String longest = mXAxis.getLongestLabel().toString();
 
         mAxisLabelPaint.setTypeface(mXAxis.getTypeface());
         mAxisLabelPaint.setTextSize(mXAxis.getTextSize());
@@ -202,13 +202,13 @@ public class XAxisRenderer extends AxisRenderer {
 
             if (mViewPortHandler.isInBoundsX(x)) {
 
-                String label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis);
+                CharSequence label = mXAxis.getValueFormatter().getFormattedValue(mXAxis.mEntries[i / 2], mXAxis);
 
                 if (mXAxis.isAvoidFirstLastClippingEnabled()) {
 
                     // avoid clipping of the last
                     if (i / 2 == mXAxis.mEntryCount - 1 && mXAxis.mEntryCount > 1) {
-                        float width = Utils.calcTextWidth(mAxisLabelPaint, label);
+                        float width = Utils.calcTextWidth(mAxisLabelPaint, label.toString());
 
                         if (width > mViewPortHandler.offsetRight() * 2
                                 && x + width > mViewPortHandler.getChartWidth())
@@ -217,7 +217,7 @@ public class XAxisRenderer extends AxisRenderer {
                         // avoid clipping of the first
                     } else if (i == 0) {
 
-                        float width = Utils.calcTextWidth(mAxisLabelPaint, label);
+                        float width = Utils.calcTextWidth(mAxisLabelPaint, label.toString());
                         x += width / 2;
                     }
                 }
@@ -227,7 +227,7 @@ public class XAxisRenderer extends AxisRenderer {
         }
     }
 
-    protected void drawLabel(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees) {
+    protected void drawLabel(Canvas c, CharSequence formattedLabel, float x, float y, MPPointF anchor, float angleDegrees) {
         Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
     }
     protected Path mRenderGridLinesPath = new Path();

@@ -146,7 +146,7 @@ public class YAxisRendererHorizontalBarChart extends YAxisRenderer {
 
         for (int i = from; i < to; i++) {
 
-            String text = mYAxis.getFormattedLabel(i);
+            String text = mYAxis.getFormattedLabel(i).toString();
 
             c.drawText(text,
                     positions[i * 2],

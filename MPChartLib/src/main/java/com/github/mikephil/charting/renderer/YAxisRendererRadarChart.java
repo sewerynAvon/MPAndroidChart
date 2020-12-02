@@ -171,7 +171,7 @@ public class YAxisRendererRadarChart extends YAxisRenderer {
 
             Utils.getPosition(center, r, mChart.getRotationAngle(), pOut);
 
-            String label = mYAxis.getFormattedLabel(j);
+            String label = mYAxis.getFormattedLabel(j).toString();
 
             c.drawText(label, pOut.x + xOffset, pOut.y, mAxisLabelPaint);
         }

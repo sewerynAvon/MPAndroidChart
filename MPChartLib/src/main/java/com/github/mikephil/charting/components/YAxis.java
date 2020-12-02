@@ -344,8 +344,8 @@ public class YAxis extends AxisBase {
 
         p.setTextSize(mTextSize);
 
-        String label = getLongestLabel();
-        float width = (float) Utils.calcTextWidth(p, label) + getXOffset() * 2f;
+        CharSequence label = getLongestLabel();
+        float width = (float) Utils.calcTextWidth(p, label.toString()) + getXOffset() * 2f;
 
         float minWidth = getMinWidth();
         float maxWidth = getMaxWidth();
@@ -371,7 +371,7 @@ public class YAxis extends AxisBase {
 
         p.setTextSize(mTextSize);
 
-        String label = getLongestLabel();
+        String label = getLongestLabel().toString();
         return (float) Utils.calcTextHeight(p, label) + getYOffset() * 2f;
     }
 

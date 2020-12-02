@@ -26,6 +26,8 @@ import com.github.mikephil.charting.formatter.IValueFormatter;
 
 import java.util.List;
 
+import javax.crypto.Mac;
+
 /**
  * Utilities class that has some helper methods. Needs to be initialized by
  * calling Utils.init(...) before usage. Inside the Chart.init() method, this is
@@ -162,7 +164,7 @@ public abstract class Utils {
         Rect r = mCalcTextHeightRect;
         r.set(0,0,0,0);
         paint.getTextBounds(demoText, 0, demoText.length(), r);
-        return r.height();
+        return r.height() * 5;
     }
 
     private static Paint.FontMetrics mFontMetrics = new Paint.FontMetrics();
@@ -553,7 +555,7 @@ public abstract class Utils {
     private static Rect mDrawTextRectBuffer = new Rect();
     private static Paint.FontMetrics mFontMetricsBuffer = new Paint.FontMetrics();
 
-    public static void drawXAxisValue(Canvas c, String text, float x, float y,
+    public static void drawXAxisValue(Canvas c, CharSequence text, float x, float y,
                                       Paint paint,
                                       MPPointF anchor, float angleDegrees) {
 
@@ -561,7 +563,6 @@ public abstract class Utils {
         float drawOffsetY = 0.f;
 
         final float lineHeight = paint.getFontMetrics(mFontMetricsBuffer);
-        paint.getTextBounds(text, 0, text.length(), mDrawTextRectBuffer);
 
         // Android sometimes has pre-padding
         drawOffsetX -= mDrawTextRectBuffer.left;
@@ -600,7 +601,7 @@ public abstract class Utils {
             c.translate(translateX, translateY);
             c.rotate(angleDegrees);
 
-            c.drawText(text, drawOffsetX, drawOffsetY, paint);
+            drawSpannable(c, text, paint, drawOffsetX, drawOffsetY);
 
             c.restore();
         } else {
@@ -613,10 +614,31 @@ public abstract class Utils {
             drawOffsetX += x;
             drawOffsetY += y;
 
-            c.drawText(text, drawOffsetX, drawOffsetY, paint);
+            drawSpannable(c, text, paint, drawOffsetX, drawOffsetY);
         }
 
         paint.setTextAlign(originalTextAlign);
+    }
+
+    public static void drawSpannable(Canvas c, CharSequence text, Paint paint, float x, float y) {
+        TextPaint textPaint = new TextPaint(paint);
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        StaticLayout layout = new StaticLayout(text, textPaint, c.getWidth(), Layout.Alignment.ALIGN_NORMAL, 1, 0, false);
+        c.save();
+        c.translate(x, y);
+        layout.draw(c);
+        c.restore();
+    }
+
+    public static float measureMultilineText(String text, TextPaint paint) {
+        String[] lines = text.split("\n");
+        float max = paint.measureText(lines[0]);
+        for (String line : lines) {
+            if (paint.measureText(line) > max) {
+                max = paint.measureText(line);
+            }
+        }
+        return max;
     }
 
     public static void drawMultilineText(Canvas c, StaticLayout textLayout,
