@@ -84,7 +84,7 @@ public class XAxisRenderer extends AxisRenderer {
         final FSize labelSize = Utils.calcTextSize(mAxisLabelPaint, longest);
 
         final float labelWidth = labelSize.width;
-        final float labelHeight = Utils.calcTextHeight(mAxisLabelPaint, "Q");
+        final float labelHeight = Utils.calcTextHeight(mAxisLabelPaint, "Q") * 8;
 
         final FSize labelRotatedSize = Utils.getSizeOfRotatedRectangleByDegrees(
                 labelWidth,

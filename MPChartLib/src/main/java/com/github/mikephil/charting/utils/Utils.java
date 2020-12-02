@@ -164,7 +164,7 @@ public abstract class Utils {
         Rect r = mCalcTextHeightRect;
         r.set(0,0,0,0);
         paint.getTextBounds(demoText, 0, demoText.length(), r);
-        return r.height() * 5;
+        return r.height();
     }
 
     private static Paint.FontMetrics mFontMetrics = new Paint.FontMetrics();
