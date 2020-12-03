@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
 
 import com.github.mikephil.charting.components.LimitLine;
@@ -159,6 +160,8 @@ public class YAxisRenderer extends AxisRenderer {
 
                 // draw a path because lines don't support dashing on lower android versions
                 c.drawPath(linePath(gridLinePath, i, positions), mGridPaint);
+
+
                 gridLinePath.reset();
             }
 
@@ -169,6 +172,8 @@ public class YAxisRenderer extends AxisRenderer {
             drawZeroLine(c);
         }
     }
+
+
 
     protected RectF mGridClippingRect = new RectF();
 

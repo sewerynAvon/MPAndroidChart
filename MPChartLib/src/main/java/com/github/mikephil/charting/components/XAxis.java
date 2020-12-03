@@ -1,6 +1,10 @@
 
 package com.github.mikephil.charting.components;
 
+import android.graphics.Paint;
+
+import androidx.annotation.ColorInt;
+
 import com.github.mikephil.charting.utils.Utils;
 
 /**
@@ -11,6 +15,10 @@ import com.github.mikephil.charting.utils.Utils;
  * @author Philipp Jahoda
  */
 public class XAxis extends AxisBase {
+
+    public int featuredIndex = -1;
+
+    public final Paint featuredValuePaint = new Paint();
 
     /**
      * width of the x-axis labels in pixels - this is automatically
@@ -115,4 +123,10 @@ public class XAxis extends AxisBase {
     public boolean isAvoidFirstLastClippingEnabled() {
         return mAvoidFirstLastClipping;
     }
+
+
+    public void setFeaturedValueBackgroundColor(@ColorInt int color) {
+        featuredValuePaint.setColor(color);
+    }
+
 }

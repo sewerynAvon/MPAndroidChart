@@ -74,6 +74,9 @@ public class XAxisRenderer extends AxisRenderer {
         computeSize();
     }
 
+
+
+
     protected void computeSize() {
 
         String longest = mXAxis.getLongestLabel().toString();
@@ -261,9 +264,24 @@ public class XAxisRenderer extends AxisRenderer {
         for (int i = 0; i < positions.length; i += 2) {
 
             drawGridLine(c, positions[i], positions[i + 1], gridLinePath);
+
         }
 
         c.restoreToCount(clipRestoreCount);
+        if (mXAxis.featuredIndex != -1) {
+            renderFeaturedXValue(c, mXAxis.featuredIndex, positions);
+        }
+    }
+
+    private void renderFeaturedXValue(Canvas c, int i, float[] positions) {
+        int currentValueIndex = i * 2;
+        int previousIndex = (i - 1) * 2;
+        int nextIndex = (i + 1) * 2;
+
+        float startX = previousIndex < 0 ? 0 : (positions[currentValueIndex] + positions[previousIndex]) / 2;
+        float endX = nextIndex >= positions.length ? mViewPortHandler.contentRight() : (positions[currentValueIndex] + positions[nextIndex]) / 2;
+        RectF rect = new RectF(startX, mViewPortHandler.contentBottom() + mXAxis.mLabelHeight, endX, mViewPortHandler.contentTop());
+        c.drawRoundRect(rect, 16f, 16f, mXAxis.featuredValuePaint);
     }
 
     protected RectF mGridClippingRect = new RectF();
@@ -279,7 +297,6 @@ public class XAxisRenderer extends AxisRenderer {
      *
      * @param c
      * @param x
-     * @param y
      * @param gridLinePath
      */
     protected void drawGridLine(Canvas c, float x, float y, Path gridLinePath) {

@@ -4,6 +4,7 @@ package com.xxmassdeveloper.mpchartexample;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
@@ -71,6 +72,8 @@ public class MultiLineChartActivity extends DemoBase implements OnSeekBarChangeL
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getAxisRight().setDrawAxisLine(false);
         chart.getAxisRight().setDrawGridLines(false);
+        chart.getXAxis().featuredIndex = 6;
+        chart.getXAxis().setFeaturedValueBackgroundColor(Color.argb(70,162, 172, 174));
         chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
