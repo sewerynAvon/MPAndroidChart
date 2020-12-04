@@ -278,7 +278,7 @@ public class XAxisRenderer extends AxisRenderer {
         int previousIndex = (i - 1) * 2;
         int nextIndex = (i + 1) * 2;
 
-        float startX = previousIndex < 0 ? 0 : (positions[currentValueIndex] + positions[previousIndex]) / 2;
+        float startX = previousIndex < 0 ? mViewPortHandler.contentLeft() : (positions[currentValueIndex] + positions[previousIndex]) / 2;
         float endX = nextIndex >= positions.length ? mViewPortHandler.contentRight() : (positions[currentValueIndex] + positions[nextIndex]) / 2;
         RectF rect = new RectF(startX, mViewPortHandler.contentBottom() + mXAxis.mLabelHeight, endX, mViewPortHandler.contentTop());
         c.drawRoundRect(rect, 16f, 16f, mXAxis.featuredValuePaint);

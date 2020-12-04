@@ -1,6 +1,8 @@
 
 package com.github.mikephil.charting.renderer;
 
+import android.graphics.RectF;
+
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 /**
