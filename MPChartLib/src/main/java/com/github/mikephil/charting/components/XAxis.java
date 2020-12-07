@@ -3,8 +3,6 @@ package com.github.mikephil.charting.components;
 
 import android.graphics.Paint;
 
-import androidx.annotation.ColorInt;
-
 import com.github.mikephil.charting.utils.Utils;
 
 /**
@@ -125,7 +123,7 @@ public class XAxis extends AxisBase {
     }
 
 
-    public void setFeaturedValueBackgroundColor(@ColorInt int color) {
+    public void setFeaturedValueBackgroundColor(int color) {
         featuredValuePaint.setColor(color);
     }
 
