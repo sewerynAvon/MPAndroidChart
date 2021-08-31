@@ -620,10 +620,28 @@ public abstract class Utils {
         paint.setTextAlign(originalTextAlign);
     }
 
+    public static boolean containsRtlChar(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            int c = text.codePointAt(i);
+            int direction = Character.getDirectionality(c);
+            if ((direction == Character.DIRECTIONALITY_RIGHT_TO_LEFT) || (direction == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC) || (direction == Character.DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING) || (direction == Character.DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE))
+                return true;
+        }
+        return false;
+    }
+
     public static void drawSpannable(Canvas c, CharSequence text, Paint paint, float x, float y) {
         TextPaint textPaint = new TextPaint(paint);
         textPaint.setTextAlign(Paint.Align.CENTER);
-        StaticLayout layout = new StaticLayout(text, textPaint, c.getWidth(), Layout.Alignment.ALIGN_NORMAL, 0.5f, 0, false);
+
+        Layout.Alignment alignment = null;
+        if (containsRtlChar(text.toString())) {
+            alignment = Layout.Alignment.ALIGN_OPPOSITE;
+        } else {
+            alignment = Layout.Alignment.ALIGN_NORMAL;
+        }
+
+        StaticLayout layout = new StaticLayout(text, textPaint, c.getWidth(), alignment, 0.5f, 0, false);
         c.save();
         c.translate(x, y);
         layout.draw(c);

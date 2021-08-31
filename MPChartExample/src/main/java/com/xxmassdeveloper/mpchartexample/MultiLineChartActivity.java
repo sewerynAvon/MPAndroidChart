@@ -5,8 +5,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.icu.text.DateFormatSymbols;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
@@ -35,6 +39,7 @@ import com.xxmassdeveloper.mpchartexample.notimportant.DemoBase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MultiLineChartActivity extends DemoBase implements OnSeekBarChangeListener,
         OnChartGestureListener, OnChartValueSelectedListener {
@@ -72,12 +77,14 @@ public class MultiLineChartActivity extends DemoBase implements OnSeekBarChangeL
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getAxisRight().setDrawAxisLine(false);
         chart.getAxisRight().setDrawGridLines(false);
-        chart.getXAxis().featuredIndex = 6;
+        chart.getXAxis().featuredValue = 6;
         chart.getXAxis().setFeaturedValueBackgroundColor(Color.argb(70,162, 172, 174));
         chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return "Mon\n" + value + "\no";
+                String [] entries = DateFormatSymbols.getInstance(new Locale("ar", "SA")).getShortWeekdays();
+                return  entries[1];
             }
         });
         // enable touch gestures

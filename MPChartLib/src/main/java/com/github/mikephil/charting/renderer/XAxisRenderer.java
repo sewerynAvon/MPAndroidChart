@@ -268,9 +268,19 @@ public class XAxisRenderer extends AxisRenderer {
         }
 
         c.restoreToCount(clipRestoreCount);
-        if (mXAxis.featuredIndex != -1) {
-            renderFeaturedXValue(c, mXAxis.featuredIndex, positions);
+        if (mXAxis.featuredValue != -1f) {
+            int featuredIndex = -1;
+            for (int i = 0; i < mXAxis.mEntries.length; i++) {
+                if (mXAxis.featuredValue == mAxis.mEntries[i]) {
+                    featuredIndex = i;
+                }
+            }
+            if (featuredIndex != -1f) {
+                renderFeaturedXValue(c, featuredIndex, positions);
+            }
         }
+
+
     }
 
     private void renderFeaturedXValue(Canvas c, int i, float[] positions) {
