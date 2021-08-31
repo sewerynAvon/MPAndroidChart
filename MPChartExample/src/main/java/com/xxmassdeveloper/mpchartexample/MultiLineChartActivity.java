@@ -77,7 +77,7 @@ public class MultiLineChartActivity extends DemoBase implements OnSeekBarChangeL
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getAxisRight().setDrawAxisLine(false);
         chart.getAxisRight().setDrawGridLines(false);
-        chart.getXAxis().featuredValue = 6;
+        chart.getXAxis().featuredIndex = 2;
         chart.getXAxis().setFeaturedValueBackgroundColor(Color.argb(70,162, 172, 174));
         chart.getXAxis().setValueFormatter(new IAxisValueFormatter() {
             @RequiresApi(api = Build.VERSION_CODES.N)

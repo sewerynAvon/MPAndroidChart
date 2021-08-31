@@ -14,7 +14,7 @@ import com.github.mikephil.charting.utils.Utils;
  */
 public class XAxis extends AxisBase {
 
-    public float featuredValue = -1f;
+    public int featuredIndex = -1;
 
     public final Paint featuredValuePaint = new Paint();
 
