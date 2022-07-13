@@ -11,6 +11,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
@@ -576,6 +578,8 @@ public abstract class Utils {
         Paint.Align originalTextAlign = paint.getTextAlign();
         paint.setTextAlign(Paint.Align.LEFT);
 
+        boolean spannable = text instanceof Spannable;
+
         if (angleDegrees != 0.f) {
 
             // Move the text drawing rect in a way that it always rotates around its center
@@ -601,7 +605,11 @@ public abstract class Utils {
             c.translate(translateX, translateY);
             c.rotate(angleDegrees);
 
-            drawSpannable(c, text, paint, drawOffsetX, drawOffsetY);
+            if(spannable) {
+                drawSpannable(c, text, paint, drawOffsetX, drawOffsetY);
+            } else {
+                c.drawText(text.toString(), drawOffsetX, drawOffsetY, paint);
+            }
 
             c.restore();
         } else {
@@ -614,7 +622,11 @@ public abstract class Utils {
             drawOffsetX += x;
             drawOffsetY += y;
 
-            drawSpannable(c, text, paint, drawOffsetX, drawOffsetY);
+            if(spannable) {
+                drawSpannable(c, text, paint, drawOffsetX, drawOffsetY);
+            } else {
+                c.drawText(text.toString(), drawOffsetX, drawOffsetY, paint);
+            }
         }
 
         paint.setTextAlign(originalTextAlign);
