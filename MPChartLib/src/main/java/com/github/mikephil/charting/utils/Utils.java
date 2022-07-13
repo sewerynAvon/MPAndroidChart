@@ -564,7 +564,12 @@ public abstract class Utils {
         float drawOffsetX = 0.f;
         float drawOffsetY = 0.f;
 
+        boolean spannable = text instanceof Spannable;
+
         final float lineHeight = paint.getFontMetrics(mFontMetricsBuffer);
+        if(!spannable) {
+            paint.getTextBounds(text.toString(), 0, text.length(), mDrawTextRectBuffer);
+        }
 
         // Android sometimes has pre-padding
         drawOffsetX -= mDrawTextRectBuffer.left;
@@ -577,8 +582,6 @@ public abstract class Utils {
         // To have a consistent point of reference, we always draw left-aligned
         Paint.Align originalTextAlign = paint.getTextAlign();
         paint.setTextAlign(Paint.Align.LEFT);
-
-        boolean spannable = text instanceof Spannable;
 
         if (angleDegrees != 0.f) {
 
